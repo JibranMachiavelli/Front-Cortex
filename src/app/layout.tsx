@@ -1,14 +1,15 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Cortex',
   description: 'System ERP',
+  icons: {
+    icon: './favicon.ico',
+  },
 };
 
 export default function RootLayout({
@@ -17,11 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={inter.className}>
-        {children}
-        <ToastContainer />
-      </body>
+    <html lang="pt-BR">
+      <body>{children}</body>
     </html>
   );
 }
+
