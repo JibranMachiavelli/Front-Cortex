@@ -1,4 +1,6 @@
 import "../globals.css";
+import loginDesktopImage from '../../assets/images/image-login/login-desktop.png';
+import Image from 'next/image';
 
 export default function RootLayout({
   children,
@@ -7,7 +9,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body className="min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${loginDesktopImage.src})` }}>
+        {children}
+      </body>
     </html>
   );
 }
+

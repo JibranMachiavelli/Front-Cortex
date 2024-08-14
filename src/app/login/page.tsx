@@ -12,15 +12,6 @@ export default function Login() {
     error('Erro ocorreu');
   }, [error]);
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {/* Imagem de fundo */}
-      <Image
-        src={svgBackground}
-        alt="background-image"
-        layout="fill"
-        className="object-cover"
-      />
-      
-    </div>
+    <h1>a</h1>
   );
 }

@@ -9,20 +9,23 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'login-desktop': "url('/assets/images/image-login/login-desktop.png')"
+      },
       colors: {
         primary: {
-          lighter: '#fff3eb',
-          light: '#FFCFAD',
-          main: '#FF6900',
-          dark: '#CC5500',
-          darker: '#291200',
+          lighter: '#BC97E2',
+          light: '#E0E0E0',
+          main: '#280F31',
+          dark: '#4D2B8C',
+          darker: '#FFFFFF',
         },
         secondary: {
-          lighter: '#fff3eb',
-          light: '#FFCFAD',
-          main: '#FF6900',
-          dark: '#CC5500',
-          darker: '#291200',
+          lighter: '#BC97E2',
+          light: '#E0E0E0',
+          main: '#280F31',
+          dark: '#4D2B8C',
+          darker: '#FFFFFF',
         },
         gray: {
           lighter: '#F9FAFB',
@@ -84,11 +87,11 @@ module.exports = {
     themes: [
       {
         cortex: {
-          primary: '#A69E8D',
-          secondary: '#D99031',
-          accent: '#0e2d62',
-          neutral: '#292e33',
-          'base-100': '#fff',
+          primary: '#280F31',
+          secondary: '#4D2B8C',
+          accent: '#BC97E2',
+          neutral: '#E0E0E0',
+          'base-100': '#FFFFFF',
           info: '#407fed',
           success: '#62AC7D',
           warning: '#D1A754',
