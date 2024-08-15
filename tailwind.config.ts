@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import a from './src/assets/images/image-login/login-desktop.png'
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,7 +11,14 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'login-desktop': "url('/assets/images/image-login/login-desktop.png')"
+        'login-desktop': "url('/assets/images/image-login/login-desktop.png')",
+        'login-tablet': "url('/assets/images/image-login/login-tablet.png')",
+        'login-mobile': "url('/assets/images/image-login/login-mobile.png')",
+      },
+      screens: {
+        'sm-bg': '495px',
+        'md-bg': '805px',
+        'lg-bg': '1024px',
       },
       colors: {
         primary: {

@@ -4,11 +4,9 @@
 import Loading from '@/components/Loading/Loading';
 
 export default function Home() {
-
   return (
-    <div className="h-screen flex items-center justify-center gap-4">
-      <h1 className="text-white text-2xl font-sans ">Redirecting . . .</h1>
-      <Loading />
+    <div className="flex items-center justify-center h-screen w-screen bg-primary-light text-primary-dark text-xl gap-4">
+      Redirecting... <Loading />
     </div>
   );
 }
