@@ -1,12 +1,21 @@
 'use client';
 
+import { login } from '../../../api/login';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import Loading from '../../components/Loading/Loading';
 import IconSVG from '../../assets/svg/svg-login/IconeSVG.svg';
 import { error, success, warning } from '../../utils/toastfy';
-import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+
+type TypeLogin = {
+  usuario: string;
+  senha: string;
+};
 
 export default function Login() {
+  const router = useRouter();
   useEffect(() => {
     error('Erro ocorreu');
     success('Erro ocorreu');
@@ -14,6 +23,36 @@ export default function Login() {
   }, []);
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [form, setForm] = useState<TypeLogin>({
+    usuario: '',
+    senha: '',
+  });
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setForm((prevForm: any) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  }
+
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const res = await login(form.usuario, form.senha);
+      if (res) {
+        success('Login efetuado com sucesso.');
+        router.push('./dashboard');
+      }
+    } catch (err) {
+      error('Erro de conexão.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <main className="h-screen w-screen flex flex-col sm:flex-row animate-slideInOpacity">
@@ -31,7 +70,9 @@ export default function Login() {
       <div className="flex flex-col items-center justify-center w-full lg:w-1/2 p-2 lg:p-8 pt-52 sm:pt-0">
         <div className="flex flex-col items-center justify-center gap-3">
           <IconSVG className="sm:hidden h-28 pl-[13.6vh] pt-1 w-full" />
-          <h1 className="sm:hidden text-4xl font-bold text-primary-light">CORTEX</h1>
+          <h1 className="sm:hidden text-4xl font-bold text-primary-light">
+            CORTEX
+          </h1>
           <h1 className="text-center text-3xl font-semibold text-secondary-main pb-3 pt-36 sm:pt-0">
             Faça login em sua conta.
           </h1>
@@ -40,12 +81,15 @@ export default function Login() {
 
         <div className="w-full max-w-sm p-7">
           <form
-            onSubmit={() => console.log('foi')}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleLogin(e)}
             className="flex flex-col gap-6"
           >
             <div className="flex flex-col gap-4 relative">
               <input
                 type="text"
+                value={form.usuario}
+                onChange={handleChange}
+                name="usuario"
                 placeholder="Usuário ou E-mail"
                 className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
               />
@@ -53,6 +97,8 @@ export default function Login() {
               <div className="relative w-full">
                 <input
                   type={isVisible ? 'text' : 'password'}
+                  form={form.senha}
+                  onChange={handleChange}
                   id="password"
                   name="password"
                   placeholder="Senha"
@@ -78,10 +124,11 @@ export default function Login() {
 
             <Button
               type="submit"
+              disabled={isLoading}
               typeButton="fill_dark"
               className="glass"
             >
-              Acessar
+              {isLoading ? <Loading /> : 'Acessar'}
             </Button>
           </form>
         </div>
