@@ -1,91 +1,93 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { useToast } from '@/hooks/useToastfy';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
 import IconSVG from '../../assets/svg/svg-login/IconeSVG.svg';
+import { error, success, warning } from '../../utils/toastfy';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 export default function Login() {
-  const { error } = useToast();
-
   useEffect(() => {
     error('Erro ocorreu');
-  }, [error]);
+    success('Erro ocorreu');
+    warning('Erro ocorreu');
+  }, []);
+
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   return (
-    <main className="h-screen w-screen flex flex-col lg:flex-row">
-      {/* Left side */}
-      <div className="hidden lg:flex lg:flex-col items-center justify-center w-full lg:w-1/2 relative">
+    <main className="h-screen w-screen flex flex-col sm:flex-row animate-slideInOpacity">
+      <div className="hidden sm:flex sm:flex-col items-center justify-center w-full sm:w-1/2 relative">
         <div className="flex flex-col items-center justify-between text-white mb-24 gap-4">
-          <h2 className="text-xl font-bold">Welcome to</h2>
-          <IconSVG className="ml-3 w-28 h-28" />
-          <h1 className="text-3xl font-bold">CORTEX</h1>
-          <p className="mt-2">Your journey starts here</p>
+          <IconSVG className="h-28 pl-12 pt-1 w-full" />
+          <h1 className="text-4xl font-bold">CORTEX</h1>
+          <p className="mt-2 text-secondary-light">Sua jornada começa aqui.</p>
         </div>
         <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-white">
-          © 2024 Cortex. All rights reserved.
+          © 2024 Cortex. Todos os direitos reservados.
         </p>
       </div>
 
-      {/* Right side */}
-      <div className="flex flex-col items-center justify-center w-full lg:w-1/2 p-4 lg:p-8">
-        <div className="hidden sm:flex pb-6">
-          <h1 className="text-center text-2xl font-semibold text-primary-main">
-            Login to Your Account
+      <div className="flex flex-col items-center justify-center w-full lg:w-1/2 p-2 lg:p-8 pt-52 sm:pt-0">
+        <div className="flex flex-col items-center justify-center gap-3">
+          <IconSVG className="sm:hidden h-28 pl-[13.6vh] pt-1 w-full" />
+          <h1 className="sm:hidden text-4xl font-bold text-primary-light">CORTEX</h1>
+          <h1 className="text-center text-3xl font-semibold text-secondary-main pb-3 pt-36 sm:pt-0">
+            Faça login em sua conta.
           </h1>
+          <p className="text-gray-dark text-xl">Seja bem-vindo, novamente!</p>
         </div>
 
-        <div className="w-full max-w-sm p-6">
-          <form className="hidden sm:flex flex-col gap-4">
-            <div className="flex flex-col gap-4">
+        <div className="w-full max-w-sm p-7">
+          <form
+            onSubmit={() => console.log('foi')}
+            className="flex flex-col gap-6"
+          >
+            <div className="flex flex-col gap-4 relative">
               <input
                 type="text"
                 placeholder="Usuário ou E-mail"
                 className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
               />
-              <input
-                type="password"
-                placeholder="Senha"
-                className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
-              />
+
+              <div className="relative w-full">
+                <input
+                  type={isVisible ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  placeholder="Senha"
+                  className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsVisible(!isVisible)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary-main focus:outline-none"
+                >
+                  {isVisible ? (
+                    <IoIosEyeOff className="w-5 h-5" />
+                  ) : (
+                    <IoIosEye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
             </div>
-            <p className="text-primary-dark cursor-pointer mb-6 underline hover:text-primary-main">
-              I lost my password?
+
+            <p className="text-primary-dark cursor-pointer mb-5 underline hover:text-primary-main">
+              Esqueceu sua senha?
             </p>
-            <Button>Acessar</Button>
+
+            <Button
+              type="submit"
+              typeButton="fill_dark"
+              className="glass"
+            >
+              Acessar
+            </Button>
           </form>
         </div>
       </div>
-
-      {/*mobile*/}
-
-      <form className="relative sm:hidden flex flex-col items-center justify-center h-full gap-4">
-        <div className=''>
-        <IconSVG className="ml-3 w-28 h-28" />
-        <h1 className="text-primary-light text-4xl font-semibold">Cortex</h1>
-        </div>
-        <div className="flex flex-col w-3/5 gap-4 pt-36">
-        <h2 className='text-center text-primary-dark font-semibold text-opacity-80'>Login to Your Account</h2>
-          <input
-            type="text"
-            placeholder="Usuário ou E-mail"
-            className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            className="input w-full border-b-2 border-b-primary-main p-2 hover:bg-primary-light"
-          />
-        </div>
-        <p className="text-primary-dark cursor-pointer mb-6 underline hover:text-primary-main">
-          I lost my password?
-        </p>
-        <div className="w-3/5">
-          <Button>Acessar</Button>
-        </div>
-      </form>
-      <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-primary-main text-center w-full">
-        © 2024 Cortex. All rights reserved.
+      <p className="sm:hidden absolute bottom-4 left-1/3 transform -translate-x-[18%] text-xs text-primary-dark">
+        © 2024 Cortex. Todos os direitos reservados.
       </p>
     </main>
   );

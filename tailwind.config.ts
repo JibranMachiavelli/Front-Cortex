@@ -22,25 +22,18 @@ module.exports = {
       },
       colors: {
         primary: {
-          lighter: '#BC97E2',
-          light: '#E0E0E0',
-          main: '#280F31',
+          lighter: '#FFFFFF',
+          light: '#f8f8ff',
+          main: '#BC97E2',
           dark: '#4D2B8C',
-          darker: '#FFFFFF',
+          darker: '#280F31 ',
         },
         secondary: {
-          lighter: '#BC97E2',
+          lighter: '#FFFFFF',
           light: '#E0E0E0',
-          main: '#280F31',
+          main: '#BC97E2',
           dark: '#4D2B8C',
-          darker: '#FFFFFF',
-        },
-        gray: {
-          lighter: '#F9FAFB',
-          light: '#F4F6F8',
-          main: '#DFE3E8',
-          dark: '#919EAB',
-          darker: '#454F5C',
+          darker: '#280F31',
         },
         terciary: {
           lighter: '#E4F1F8',
@@ -48,6 +41,13 @@ module.exports = {
           main: '#57ADD9',
           dark: '#4E819C',
           darker: '#345769',
+        },
+        gray: {
+          lighter: '#F9FAFB',
+          light: '#F4F6F8',
+          main: '#DFE3E8',
+          dark: '#919EAB',
+          darker: '#454F5C',
         },
         success: {
           lighter: '#DFEFE4',
@@ -72,15 +72,20 @@ module.exports = {
         },
       },
       scale: {
-        '98': '0.98',
+        '98': '0.99644',
       },
       keyframes: {
+        slideInOpacity: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         fadeIn: {
           '0%': { opacity: '0', transform: 'scale(0.5)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
       animation: {
+        slideInOpacity: 'slideInOpacity 0.4s linear',
         fadeIn: 'fadeIn 0.08s ease-in-out',
       },
     },

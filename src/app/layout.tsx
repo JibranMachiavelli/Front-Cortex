@@ -1,8 +1,7 @@
-// app/layout.tsx ou src/app/layout.tsx
-
+import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css'; // Certifique-se de que o caminho está correto
+import Provider from '@/utils/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        {children}
+        <Provider>
+          {children}
+        </Provider>
       </body>
     </html>
   );
